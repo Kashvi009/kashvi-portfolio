@@ -32,7 +32,7 @@ const Hero = () => {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
             </span>
-            Open to Product · DevRel · Growth roles
+            Available for new opportunities
           </div>
 
           <h1 className="font-display text-6xl md:text-7xl lg:text-[6rem] font-bold leading-[0.9] tracking-tight mb-6 animate-fade-up stagger-1">
