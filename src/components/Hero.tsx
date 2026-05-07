@@ -41,30 +41,6 @@ const Hero = () => {
             <span className="text-gradient-yellow drop-shadow-[0_0_30px_hsl(var(--primary)/0.35)]">Arora.</span>
           </h1>
 
-          <div
-            className="h-10 md:h-12 mb-5 flex items-center animate-fade-up stagger-2"
-            onMouseEnter={() => setPaused(true)}
-            onMouseLeave={() => setPaused(false)}
-          >
-            <span className="text-sm md:text-base font-mono text-muted-foreground mr-3">/</span>
-            <div className="relative">
-              {ROLES.map((r, i) => (
-                <span
-                  key={r}
-                  className={`absolute left-0 top-0 whitespace-nowrap font-display text-2xl md:text-4xl font-semibold transition-all duration-500 ${
-                    i === idx
-                      ? "opacity-100 translate-y-0 text-primary"
-                      : "opacity-0 -translate-y-2"
-                  }`}
-                >
-                  {r}
-                </span>
-              ))}
-              <span className="invisible font-display text-2xl md:text-4xl font-semibold">
-                {ROLES.reduce((a, b) => (a.length > b.length ? a : b))}
-              </span>
-            </div>
-          </div>
 
           <p className="text-lg md:text-2xl font-display text-foreground/85 max-w-2xl mb-10 animate-fade-up stagger-3 leading-snug">
             Builder at the intersection of <span className="text-primary">tech</span>,{" "}
