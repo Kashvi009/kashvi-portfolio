@@ -193,12 +193,14 @@ const Experience = () => {
               Where I've <span className="text-gradient-yellow">shipped</span>.
             </h2>
           </div>
-          <p
-            className="text-sm text-muted-foreground font-mono hidden md:block transition-opacity duration-500"
+          <div
+            className="hidden md:flex items-center gap-2 text-xs text-muted-foreground font-mono uppercase tracking-widest transition-opacity duration-500"
             style={{ opacity: showHint ? 1 : 0 }}
           >
-            ← drag to scroll →
-          </p>
+            <span>{String(activeIdx + 1).padStart(2, "0")}</span>
+            <span className="w-8 h-px bg-border" />
+            <span>{String(experiences.length).padStart(2, "0")}</span>
+          </div>
         </div>
 
         <div className="h-px bg-border mb-6 relative overflow-hidden">
