@@ -4,7 +4,6 @@ const stats = [
   { value: 1000000, label: "Impressions Driven", display: (n: number) => `${(n / 1000000).toFixed(n >= 1000000 ? 0 : 1)}M+` },
   { value: 2000, label: "Developers Reached", display: (n: number) => `${(n / 1000).toFixed(0)}K+` },
   { value: 30, label: "Clients Transformed", display: (n: number) => `${n}+` },
-  { value: 25000, label: "Event Registrations", display: (n: number) => `${(n / 1000).toFixed(0)}K+` },
   { value: 300, label: "Events Curated", display: (n: number) => `${n}+` },
 ];
 

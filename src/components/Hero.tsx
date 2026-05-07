@@ -1,4 +1,4 @@
-import { ArrowRight, Download, ChevronDown } from "lucide-react";
+import { ArrowRight, Download, ChevronDown, Linkedin } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const ROLES = ["Product Builder", "DevRel Engineer", "Growth Strategist", "Community Architect"];
