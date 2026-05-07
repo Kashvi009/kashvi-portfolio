@@ -223,7 +223,7 @@ const Experience = () => {
           return (
             <article
               key={exp.company}
-              ref={(el) => (cardRefs.current[i] = el)}
+              ref={(el) => { cardRefs.current[i] = el; }}
               data-idx={i}
               className="shrink-0 w-[88vw] md:w-[480px] card-dark p-7"
               style={{
