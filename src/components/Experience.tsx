@@ -1,4 +1,5 @@
-import { useRef, useEffect, useState, useCallback } from "react";
+import { useRef, useEffect, useState } from "react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 const EASE = "cubic-bezier(0.16, 1, 0.3, 1)";
 
@@ -44,29 +45,12 @@ const experiences = [
   },
 ];
 
-const HINT_KEY = "exp-drag-hint-dismissed";
-
 const Experience = () => {
   const trackRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [progress, setProgress] = useState(0);
   const [activeIdx, setActiveIdx] = useState(0);
-  const [showHint, setShowHint] = useState(true);
 
-  // Hint dismissal
-  useEffect(() => {
-    if (typeof window !== "undefined" && localStorage.getItem(HINT_KEY)) {
-      setShowHint(false);
-    }
-  }, []);
-  const dismissHint = useCallback(() => {
-    if (showHint) {
-      setShowHint(false);
-      try { localStorage.setItem(HINT_KEY, "1"); } catch {}
-    }
-  }, [showHint]);
-
-  // Progress bar
   useEffect(() => {
     const el = trackRef.current;
     if (!el) return;
@@ -78,7 +62,6 @@ const Experience = () => {
     return () => el.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Active card observer
   useEffect(() => {
     const root = trackRef.current;
     if (!root) return;
@@ -97,88 +80,15 @@ const Experience = () => {
     return () => obs.disconnect();
   }, []);
 
-  // Pointer-based momentum drag
-  useEffect(() => {
-    const el = trackRef.current;
-    if (!el) return;
+  const goTo = (i: number) => {
+    const target = cardRefs.current[i];
+    if (target && trackRef.current) {
+      trackRef.current.scrollTo({ left: target.offsetLeft - trackRef.current.offsetLeft, behavior: "smooth" });
+    }
+  };
 
-    let isDown = false;
-    let startX = 0;
-    let startScroll = 0;
-    let lastX = 0;
-    let lastT = 0;
-    let velocity = 0; // px/ms
-    let raf = 0;
-    let pointerId = -1;
-
-    const onDown = (e: PointerEvent) => {
-      // Ignore on links/buttons inside cards
-      if ((e.target as HTMLElement).closest("a,button")) return;
-      isDown = true;
-      pointerId = e.pointerId;
-      el.setPointerCapture(pointerId);
-      el.style.cursor = "grabbing";
-      startX = e.clientX;
-      lastX = e.clientX;
-      lastT = performance.now();
-      startScroll = el.scrollLeft;
-      velocity = 0;
-      cancelAnimationFrame(raf);
-    };
-
-    const onMove = (e: PointerEvent) => {
-      if (!isDown) return;
-      e.preventDefault();
-      const dx = e.clientX - startX;
-      el.scrollLeft = startScroll - dx;
-      const now = performance.now();
-      const dt = now - lastT;
-      if (dt > 0) {
-        const instant = (e.clientX - lastX) / dt; // px/ms
-        // Smooth velocity over last ~100ms
-        velocity = velocity * 0.6 + instant * 0.4;
-      }
-      lastX = e.clientX;
-      lastT = now;
-      if (Math.abs(dx) > 6) dismissHint();
-    };
-
-    const flick = () => {
-      // velocity in px/ms — convert to px/frame approx
-      let v = -velocity * 16; // px per ~16ms frame, inverted for scroll direction
-      const step = () => {
-        if (Math.abs(v) < 0.5) return;
-        el.scrollLeft += v;
-        v *= 0.92;
-        raf = requestAnimationFrame(step);
-      };
-      raf = requestAnimationFrame(step);
-    };
-
-    const onUp = () => {
-      if (!isDown) return;
-      isDown = false;
-      el.style.cursor = "grab";
-      try { el.releasePointerCapture(pointerId); } catch {}
-      flick();
-    };
-
-    el.style.cursor = "grab";
-    el.addEventListener("pointerdown", onDown);
-    el.addEventListener("pointermove", onMove);
-    el.addEventListener("pointerup", onUp);
-    el.addEventListener("pointercancel", onUp);
-    el.addEventListener("pointerleave", onUp);
-
-    return () => {
-      cancelAnimationFrame(raf);
-      el.removeEventListener("pointerdown", onDown);
-      el.removeEventListener("pointermove", onMove);
-      el.removeEventListener("pointerup", onUp);
-      el.removeEventListener("pointercancel", onUp);
-      el.removeEventListener("pointerleave", onUp);
-    };
-  }, [dismissHint]);
+  const prev = () => goTo(Math.max(0, activeIdx - 1));
+  const next = () => goTo(Math.min(experiences.length - 1, activeIdx + 1));
 
   return (
     <section className="section-padding relative" id="experience">
@@ -193,12 +103,32 @@ const Experience = () => {
               Where I've <span className="text-gradient-yellow">shipped</span>.
             </h2>
           </div>
-          <p
-            className="text-sm text-muted-foreground font-mono hidden md:block transition-opacity duration-500"
-            style={{ opacity: showHint ? 1 : 0 }}
-          >
-            ← drag to scroll →
-          </p>
+
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 text-xs text-muted-foreground font-mono uppercase tracking-widest">
+              <span className="text-primary">{String(activeIdx + 1).padStart(2, "0")}</span>
+              <span className="w-8 h-px bg-border" />
+              <span>{String(experiences.length).padStart(2, "0")}</span>
+            </div>
+            <div className="flex gap-2">
+              <button
+                onClick={prev}
+                disabled={activeIdx === 0}
+                className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-foreground hover:border-primary hover:text-primary transition-colors disabled:opacity-30 disabled:hover:border-border disabled:hover:text-foreground"
+                aria-label="Previous"
+              >
+                <ArrowLeft size={16} />
+              </button>
+              <button
+                onClick={next}
+                disabled={activeIdx === experiences.length - 1}
+                className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-foreground hover:border-primary hover:text-primary transition-colors disabled:opacity-30 disabled:hover:border-border disabled:hover:text-foreground"
+                aria-label="Next"
+              >
+                <ArrowRight size={16} />
+              </button>
+            </div>
+          </div>
         </div>
 
         <div className="h-px bg-border mb-6 relative overflow-hidden">
@@ -211,7 +141,7 @@ const Experience = () => {
 
       <div
         ref={trackRef}
-        className="flex gap-5 overflow-x-auto px-6 md:px-12 lg:px-20 pb-6 select-none no-scrollbar"
+        className="flex gap-5 overflow-x-auto px-6 md:px-12 lg:px-20 pb-6 no-scrollbar scroll-smooth"
         style={{
           scrollSnapType: "x mandatory",
           scrollbarWidth: "none",
@@ -228,15 +158,10 @@ const Experience = () => {
               className="shrink-0 w-[88vw] md:w-[480px] card-dark p-7"
               style={{
                 scrollSnapAlign: "start",
-                transition: `transform 350ms ${EASE}, opacity 350ms ${EASE}`,
-                opacity: isActive ? 1 : 0.6,
-                transform: isActive ? "scale(1)" : "scale(0.97)",
-              }}
-              onMouseEnter={(e) => {
-                if (isActive) (e.currentTarget as HTMLElement).style.transform = "translateY(-6px)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.transform = isActive ? "scale(1)" : "scale(0.97)";
+                transition: `transform 500ms ${EASE}, opacity 500ms ${EASE}, filter 500ms ${EASE}`,
+                opacity: isActive ? 1 : 0.55,
+                transform: isActive ? "scale(1)" : "scale(0.96)",
+                filter: isActive ? "blur(0px)" : "blur(1px)",
               }}
             >
               <div className="flex items-center justify-between mb-5">

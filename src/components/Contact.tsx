@@ -21,10 +21,10 @@ const Contact = () => {
             Contact
           </div>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.02] mb-5">
-            Open to <span className="text-gradient-yellow">PM, DevRel & Growth</span> roles.
+            Let's <span className="text-gradient-yellow">build</span> something that matters.
           </h2>
           <p className="text-lg text-muted-foreground max-w-md">
-            Let's build something that matters.
+            Open to internships, full-time roles, freelance briefs & collaborations.
           </p>
         </Reveal>
 
