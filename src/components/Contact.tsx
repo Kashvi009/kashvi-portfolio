@@ -33,7 +33,7 @@ const Contact = () => {
                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </a>
               <a
-                href="https://drive.google.com/file/d/1ZdGNefJRjj_st2VKx6wl-g0rLx662UZW/view?usp=sharing"
+                href="https://drive.google.com/file/d/1tcLdSJ3uyFL95JEgHFkP3vwJNakqrKCL/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3.5 bg-secondary border border-border text-foreground rounded-full font-semibold transition-all hover:border-accent/50 hover:text-accent"
