@@ -1,84 +1,103 @@
-import { ArrowDown, Linkedin, Mail, MapPin } from "lucide-react";
+import { ArrowRight, Download, Sparkles } from "lucide-react";
+import { useEffect, useState } from "react";
+
+const stats = [
+  { value: 1000000, label: "Impressions", suffix: "+", display: "1M" },
+  { value: 200, label: "Events Curated", suffix: "+", display: "200" },
+  { value: 50, label: "Judge Panels", suffix: "+", display: "50" },
+];
+
+const Counter = ({ target, display, suffix }: { target: number; display: string; suffix: string }) => {
+  const [count, setCount] = useState(0);
+  const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    let start = 0;
+    const duration = 1800;
+    const startTime = performance.now();
+    const step = (now: number) => {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.floor(eased * target));
+      if (progress < 1) requestAnimationFrame(step);
+      else setDone(true);
+    };
+    requestAnimationFrame(step);
+  }, [target]);
+
+  return (
+    <span>
+      {done ? display : count >= 1000 ? `${(count / 1000).toFixed(0)}K` : count}
+      {suffix}
+    </span>
+  );
+};
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: `url('/hero-bg.jpg')`,
-        }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-wine-dark/90 via-wine/85 to-wine-dark/95" />
-      </div>
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20" id="home">
+      {/* Background effects */}
+      <div className="absolute inset-0 grid-bg opacity-40" />
+      <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
+      <div className="absolute top-1/4 -left-20 w-96 h-96 bg-primary/20 rounded-full blur-[120px] animate-glow-pulse" />
+      <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-accent/15 rounded-full blur-[120px] animate-glow-pulse" />
 
-      {/* Decorative Elements */}
-      <div className="absolute top-20 left-10 w-72 h-72 bg-gold/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-gold/5 rounded-full blur-3xl" />
-
-      {/* Content */}
-      <div className="relative z-10 section-padding container-narrow text-center">
-        <div className="max-w-4xl mx-auto">
-          {/* Name */}
-          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-primary-foreground mb-6 animate-fade-up opacity-0">
-            Kashvi Arora
-          </h1>
-
-          {/* Tagline */}
-          <p className="text-xl md:text-2xl lg:text-3xl text-primary-foreground/90 font-light mb-4 animate-fade-up opacity-0 stagger-1">
-            Personal Brand Strategist
-          </p>
-
-          {/* Quick Stats */}
-          <div className="flex flex-wrap justify-center gap-3 md:gap-4 mb-8 animate-fade-up opacity-0 stagger-2">
-            <span className="px-4 py-2 bg-primary-foreground/10 backdrop-blur-sm rounded-full text-primary-foreground/90 text-sm md:text-base border border-primary-foreground/20">
-              1M+ Impressions
-            </span>
-            <span className="px-4 py-2 bg-primary-foreground/10 backdrop-blur-sm rounded-full text-primary-foreground/90 text-sm md:text-base border border-primary-foreground/20">
-              Tech x Creativity
-            </span>
-            <span className="px-4 py-2 bg-primary-foreground/10 backdrop-blur-sm rounded-full text-primary-foreground/90 text-sm md:text-base border border-primary-foreground/20">
-              Community Builder
-            </span>
+      <div className="relative z-10 container-narrow px-6 md:px-12 lg:px-20 w-full">
+        <div className="max-w-5xl">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/5 text-primary text-xs font-medium mb-8 animate-fade-up">
+            <Sparkles size={12} />
+            Available for opportunities · New Delhi, India
           </div>
 
-          {/* Description */}
-          <p className="text-lg md:text-xl text-primary-foreground/80 max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-up opacity-0 stagger-3">
-            Builder at heart. Helping people discover their voice and amplify their impact through 
-            data-driven strategies and creative storytelling.
+          <h1 className="font-display text-5xl md:text-7xl lg:text-[5.5rem] font-bold leading-[0.95] mb-6 animate-fade-up stagger-1">
+            <span className="text-gradient">Kashvi</span>
+            <br />
+            <span className="text-foreground">Arora.</span>
+          </h1>
+
+          <p className="text-xl md:text-3xl font-display font-medium text-foreground/90 max-w-3xl mb-4 animate-fade-up stagger-2">
+            Builder at the intersection of{" "}
+            <span className="text-primary">tech</span>,{" "}
+            <span className="text-accent">leadership</span>, and growth.
           </p>
 
-          {/* Contact Links */}
-          <div className="flex flex-wrap justify-center gap-4 mb-16 animate-fade-up opacity-0 stagger-4">
-            <a 
-              href="mailto:arorakashvi15@gmail.com"
-              className="flex items-center gap-2 px-6 py-3 bg-gold text-accent-foreground rounded-full font-medium hover:bg-gold-light transition-all duration-300 hover:scale-105 shadow-lg"
+          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mb-10 animate-fade-up stagger-3">
+            Shipped SaaS products. Scaled communities to 1M+ impressions. Led 250+ initiatives across product, growth, and strategy.
+          </p>
+
+          {/* CTAs */}
+          <div className="flex flex-wrap gap-4 mb-16 animate-fade-up stagger-4">
+            <a
+              href="#contact"
+              className="group inline-flex items-center gap-2 px-6 py-3.5 bg-primary text-primary-foreground rounded-full font-semibold transition-all hover:shadow-yellow hover:scale-[1.02]"
             >
-              <Mail size={18} />
-              Get in Touch
+              Contact Me
+              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </a>
-            <a 
+            <a
               href="https://linkedin.com/in/kashvi15"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-6 py-3 bg-primary-foreground/10 text-primary-foreground border border-primary-foreground/30 rounded-full font-medium hover:bg-primary-foreground/20 transition-all duration-300 backdrop-blur-sm"
+              className="inline-flex items-center gap-2 px-6 py-3.5 bg-secondary border border-border text-foreground rounded-full font-semibold transition-all hover:border-primary/50 hover:text-primary"
             >
-              <Linkedin size={18} />
-              LinkedIn
+              <Download size={18} />
+              View Resume
             </a>
           </div>
 
-          {/* Location */}
-          <div className="flex items-center justify-center gap-2 text-primary-foreground/60 animate-fade-up opacity-0 stagger-5">
-            <MapPin size={16} />
-            <span>New Delhi, India</span>
+          {/* Animated counters */}
+          <div className="grid grid-cols-3 gap-4 md:gap-8 max-w-2xl animate-fade-up stagger-5">
+            {stats.map((s) => (
+              <div key={s.label} className="border-l-2 border-primary/40 pl-4 md:pl-6">
+                <div className="font-display text-3xl md:text-5xl font-bold text-gradient-yellow leading-none mb-2">
+                  <Counter target={s.value} display={s.display} suffix={s.suffix} />
+                </div>
+                <div className="text-xs md:text-sm text-muted-foreground uppercase tracking-wider">
+                  {s.label}
+                </div>
+              </div>
+            ))}
           </div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-          <ArrowDown className="text-primary-foreground/50" size={24} />
         </div>
       </div>
     </section>
