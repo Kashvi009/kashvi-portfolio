@@ -1,4 +1,5 @@
 import { Award, Mic, Trophy, Star, GraduationCap, Globe } from "lucide-react";
+import Reveal from "@/components/Reveal";
 
 const cards = [
   { icon: Mic, color: "accent", title: "Microsoft Speaker", desc: "Professional Speaker at Microsoft Season of Agents (Azure Developer Community)." },
@@ -13,41 +14,46 @@ const Achievements = () => {
   return (
     <section className="section-padding relative" id="achievements">
       <div className="container-narrow">
-        <div className="section-label">
-          <span className="w-8 h-px bg-primary" />
-          Achievements
-        </div>
-
-        <h2 className="font-display text-4xl md:text-5xl font-bold mb-12">
-          Recognition & <span className="text-gradient-yellow">awards</span>.
-        </h2>
-
-        <div className="relative card-dark p-8 md:p-12 mb-6 overflow-hidden border-primary/30 bg-gradient-to-br from-primary/10 via-transparent to-accent/5">
-          <div className="absolute -top-20 -right-20 w-72 h-72 bg-primary/20 rounded-full blur-[100px]" />
-          <div className="relative z-10">
-            <Trophy className="text-primary mb-4" size={32} />
-            <p className="text-xs font-mono uppercase tracking-widest text-primary mb-2">
-              Sheratal Excellence Awards · 2026
-            </p>
-            <h3 className="font-display text-3xl md:text-5xl font-bold mb-4 text-gradient">
-              Young Entrepreneur Award
-            </h3>
-            <p className="text-muted-foreground max-w-2xl text-lg">
-              Recognized for leadership, innovation, and shipping impact-driven initiatives at the national level.
-            </p>
+        <Reveal heading>
+          <div className="section-label">
+            <span className="w-8 h-px bg-primary" />
+            Achievements
           </div>
-        </div>
+          <h2 className="font-display text-4xl md:text-5xl font-bold mb-12">
+            Recognition & <span className="text-gradient-yellow">awards</span>.
+          </h2>
+        </Reveal>
+
+        <Reveal duration={700}>
+          <div className="relative card-dark p-8 md:p-12 mb-6 overflow-hidden border-primary/30 bg-gradient-to-br from-primary/10 via-transparent to-accent/5">
+            <div className="absolute -top-20 -right-20 w-72 h-72 bg-primary/20 rounded-full blur-[100px]" />
+            <div className="relative z-10">
+              <Trophy className="text-primary mb-4" size={32} />
+              <p className="text-xs font-mono uppercase tracking-widest text-primary mb-2">
+                Sheratal Excellence Awards · 2026
+              </p>
+              <h3 className="font-display text-3xl md:text-5xl font-bold mb-4 text-gradient">
+                Young Entrepreneur Award
+              </h3>
+              <p className="text-muted-foreground max-w-2xl text-lg">
+                Recognized for leadership, innovation, and shipping impact-driven initiatives at the national level.
+              </p>
+            </div>
+          </div>
+        </Reveal>
 
         <div className="grid md:grid-cols-3 gap-4">
-          {cards.map((c) => {
+          {cards.map((c, i) => {
             const Icon = c.icon;
             const colorClass = c.color === "accent" ? "text-accent" : "text-primary";
             return (
-              <div key={c.title} className="card-dark p-6 group">
-                <Icon className={`${colorClass} mb-4 group-hover:scale-110 transition-transform`} size={24} />
-                <h3 className="font-display text-lg font-bold mb-2">{c.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{c.desc}</p>
-              </div>
+              <Reveal key={c.title} delay={i * 80} duration={700}>
+                <div className="card-dark p-6 group h-full">
+                  <Icon className={`${colorClass} mb-4 group-hover:scale-110 transition-transform`} size={24} />
+                  <h3 className="font-display text-lg font-bold mb-2">{c.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{c.desc}</p>
+                </div>
+              </Reveal>
             );
           })}
         </div>

@@ -1,4 +1,5 @@
 import { Mail, Linkedin, Download, ArrowUpRight } from "lucide-react";
+import Reveal from "@/components/Reveal";
 
 const links = [
   { Icon: Mail, label: "arorakashvi15@gmail.com", href: "mailto:arorakashvi15@gmail.com" },
@@ -14,7 +15,7 @@ const Contact = () => {
   return (
     <section className="section-padding relative" id="contact">
       <div className="container-narrow grid md:grid-cols-2 gap-12 md:gap-16 items-start">
-        <div>
+        <Reveal heading>
           <div className="section-label">
             <span className="w-8 h-px bg-primary" />
             Contact
@@ -25,12 +26,12 @@ const Contact = () => {
           <p className="text-lg text-muted-foreground max-w-md">
             Let's build something that matters.
           </p>
-        </div>
+        </Reveal>
 
         <div className="md:pt-4">
           <ul className="divide-y divide-border border-y border-border">
-            {links.map(({ Icon, label, href }) => (
-              <li key={href}>
+            {links.map(({ Icon, label, href }, i) => (
+              <Reveal key={href} delay={i * 80} duration={500} as="li">
                 <a
                   href={href}
                   target={href.startsWith("http") ? "_blank" : undefined}
@@ -46,7 +47,7 @@ const Contact = () => {
                     className="text-muted-foreground group-hover:text-primary group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all"
                   />
                 </a>
-              </li>
+              </Reveal>
             ))}
           </ul>
         </div>

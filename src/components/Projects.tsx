@@ -1,4 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
+import Reveal from "@/components/Reveal";
 
 const projects = [
   {
@@ -25,80 +26,81 @@ const Projects = () => {
   return (
     <section className="section-padding relative" id="projects">
       <div className="container-narrow">
-        <div className="section-label">
-          <span className="w-8 h-px bg-primary" />
-          Projects
-        </div>
-        <h2 className="font-display text-4xl md:text-5xl font-bold mb-12">
-          Things I've <span className="text-gradient-yellow">built</span>.
-        </h2>
+        <Reveal heading>
+          <div className="section-label">
+            <span className="w-8 h-px bg-primary" />
+            Projects
+          </div>
+          <h2 className="font-display text-4xl md:text-5xl font-bold mb-12">
+            Things I've <span className="text-gradient-yellow">built</span>.
+          </h2>
+        </Reveal>
 
         <div className="grid md:grid-cols-2 gap-6">
-          {projects.map((p) => {
+          {projects.map((p, i) => {
             const isRed = p.accent === "red";
             return (
-              <article
-                key={p.title}
-                className={`group relative card-dark ${isRed ? "card-dark-red" : ""} p-8 md:p-10 min-h-[420px] flex flex-col overflow-hidden cursor-pointer`}
-              >
-                <div className="flex flex-wrap gap-1.5 mb-6">
-                  {p.tags.map((t) => (
-                    <span
-                      key={t}
-                      className={`text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full border ${
-                        isRed
-                          ? "border-accent/30 text-accent bg-accent/5"
-                          : "border-primary/30 text-primary bg-primary/5"
-                      }`}
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-
-                <h3 className="font-display text-3xl md:text-4xl font-bold mb-2 leading-tight">
-                  {p.title}
-                </h3>
-                <p className={`text-sm font-mono mb-6 ${isRed ? "text-accent" : "text-primary"}`}>
-                  {p.subtitle}
-                </p>
-
-                <p className="text-muted-foreground text-base leading-relaxed mb-6">{p.line}</p>
-
-                <div
-                  className={`inline-flex items-start text-sm font-semibold mb-auto ${
-                    isRed ? "text-accent" : "text-primary"
-                  }`}
+              <Reveal key={p.title} delay={i * 80} duration={700}>
+                <article
+                  className={`group relative card-dark ${isRed ? "card-dark-red" : ""} p-8 md:p-10 min-h-[420px] flex flex-col overflow-hidden cursor-pointer h-full`}
                 >
-                  → {p.callout}
-                </div>
-
-                {/* Hover reveal */}
-                <div className="mt-8 pt-6 border-t border-border opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <p className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground mb-2">
-                    What I owned
-                  </p>
-                  <div className="flex flex-wrap gap-1.5">
-                    {p.reveal.map((r) => (
-                      <span key={r} className="text-xs font-mono text-foreground/80">
-                        /{r}
+                  <div className="flex flex-wrap gap-1.5 mb-6">
+                    {p.tags.map((t) => (
+                      <span
+                        key={t}
+                        className={`text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full border ${
+                          isRed
+                            ? "border-accent/30 text-accent bg-accent/5"
+                            : "border-primary/30 text-primary bg-primary/5"
+                        }`}
+                      >
+                        {t}
                       </span>
                     ))}
                   </div>
-                </div>
 
-                {/* Bottom slide-in CTA */}
-                <div className="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                  <h3 className="font-display text-3xl md:text-4xl font-bold mb-2 leading-tight">
+                    {p.title}
+                  </h3>
+                  <p className={`text-sm font-mono mb-6 ${isRed ? "text-accent" : "text-primary"}`}>
+                    {p.subtitle}
+                  </p>
+
+                  <p className="text-muted-foreground text-base leading-relaxed mb-6">{p.line}</p>
+
                   <div
-                    className={`flex items-center justify-between px-8 py-4 ${
-                      isRed ? "bg-accent text-accent-foreground" : "bg-primary text-primary-foreground"
+                    className={`inline-flex items-start text-sm font-semibold mb-auto ${
+                      isRed ? "text-accent" : "text-primary"
                     }`}
                   >
-                    <span className="font-semibold text-sm">Read Case Study</span>
-                    <ArrowUpRight size={20} />
+                    → {p.callout}
                   </div>
-                </div>
-              </article>
+
+                  <div className="mt-8 pt-6 border-t border-border opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <p className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground mb-2">
+                      What I owned
+                    </p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {p.reveal.map((r) => (
+                        <span key={r} className="text-xs font-mono text-foreground/80">
+                          /{r}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    <div
+                      className={`flex items-center justify-between px-8 py-4 ${
+                        isRed ? "bg-accent text-accent-foreground" : "bg-primary text-primary-foreground"
+                      }`}
+                    >
+                      <span className="font-semibold text-sm">Read Case Study</span>
+                      <ArrowUpRight size={20} />
+                    </div>
+                  </div>
+                </article>
+              </Reveal>
             );
           })}
         </div>
