@@ -24,7 +24,7 @@ const Contact = () => {
             Let's <span className="text-gradient-yellow">build</span> something that matters.
           </h2>
           <p className="text-lg text-muted-foreground max-w-md">
-            Let's build something that matters.
+            Open to internships, full-time roles, freelance briefs & collaborations.
           </p>
         </Reveal>
 
