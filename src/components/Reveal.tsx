@@ -1,23 +1,19 @@
-import { ReactNode } from "react";
-import { useReveal } from "@/hooks/useReveal";
+import { ReactNode, ElementType } from "react";
+import { useRevealOnce } from "@/hooks/useReveal";
 
 interface Props {
   children: ReactNode;
   delay?: number;
+  duration?: number;
+  heading?: boolean;
   className?: string;
-  as?: "div" | "section" | "li" | "article";
+  as?: ElementType;
 }
 
-const Reveal = ({ children, delay = 0, className = "", as: Tag = "div" }: Props) => {
-  const { ref, visible } = useReveal<HTMLDivElement>(0.15);
+const Reveal = ({ children, delay = 0, duration, heading, className = "", as: Tag = "div" }: Props) => {
+  const { ref, style } = useRevealOnce<HTMLDivElement>({ heading, delay, duration });
   return (
-    <Tag
-      ref={ref as never}
-      style={{ transitionDelay: `${delay}ms` }}
-      className={`transition-all duration-[600ms] ease-out will-change-transform ${
-        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
-      } ${className}`}
-    >
+    <Tag ref={ref} style={style} className={className}>
       {children}
     </Tag>
   );
