@@ -1,4 +1,4 @@
-import { ArrowRight, Download, ChevronDown } from "lucide-react";
+import { ArrowRight, Download, ChevronDown, Linkedin } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const ROLES = ["Product Builder", "DevRel Engineer", "Growth Strategist", "Community Architect"];
@@ -80,10 +80,19 @@ const Hero = () => {
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </button>
             <a
+              href="https://linkedin.com/in/kashvi15"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-2 px-6 py-3.5 bg-secondary border border-border text-foreground rounded-full font-semibold transition-all hover:border-accent/60 hover:text-accent hover:shadow-red"
+            >
+              <Linkedin size={18} />
+              Visit LinkedIn
+            </a>
+            <a
               href="https://drive.google.com/file/d/1tcLdSJ3uyFL95JEgHFkP3vwJNakqrKCL/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3.5 bg-secondary border border-border text-foreground rounded-full font-semibold transition-all hover:border-primary/50 hover:text-primary"
+              className="inline-flex items-center gap-2 px-6 py-3.5 bg-transparent border border-border text-foreground rounded-full font-semibold transition-all hover:border-primary/50 hover:text-primary"
             >
               <Download size={18} />
               Download Resume

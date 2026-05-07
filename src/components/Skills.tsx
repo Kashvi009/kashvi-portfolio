@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Reveal from "@/components/Reveal";
 
 const groups = [
   {
@@ -24,40 +25,44 @@ const Skills = () => {
   return (
     <section className="section-padding relative" id="skills">
       <div className="container-narrow">
-        <div className="section-label">
-          <span className="w-8 h-px bg-primary" />
-          Skills
-        </div>
-        <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
-          The <span className="text-gradient-yellow">stack</span>.
-        </h2>
-        <p className="text-sm text-muted-foreground mb-10 font-mono">
-          Click a header to filter · click again to reset
-        </p>
+        <Reveal heading>
+          <div className="section-label">
+            <span className="w-8 h-px bg-primary" />
+            Skills
+          </div>
+          <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
+            The <span className="text-gradient-yellow">stack</span>.
+          </h2>
+          <p className="text-sm text-muted-foreground mb-10 font-mono">
+            Click a header to filter · click again to reset
+          </p>
+        </Reveal>
 
         <div className="grid md:grid-cols-3 gap-10">
-          {groups.map((g) => {
+          {groups.map((g, i) => {
             const isActive = active === g.key;
             const isDimmed = active && !isActive;
             return (
-              <div key={g.key} className={`transition-opacity ${isDimmed ? "opacity-30" : "opacity-100"}`}>
-                <button
-                  onClick={() => setActive(isActive ? null : g.key)}
-                  className={`text-sm font-mono uppercase tracking-widest mb-4 transition-colors ${
-                    isActive ? "text-primary" : "text-accent hover:text-primary"
-                  }`}
-                >
-                  /{g.title}
-                  {isActive && <span className="ml-2">●</span>}
-                </button>
-                <div className="flex flex-wrap gap-2">
-                  {g.skills.map((s) => (
-                    <span key={s} className="pill text-sm py-2 px-4">
-                      {s}
-                    </span>
-                  ))}
+              <Reveal key={g.key} delay={i * 80} duration={500}>
+                <div className={`transition-opacity duration-300 ${isDimmed ? "opacity-30" : "opacity-100"}`}>
+                  <button
+                    onClick={() => setActive(isActive ? null : g.key)}
+                    className={`text-sm font-mono uppercase tracking-widest mb-4 transition-colors ${
+                      isActive ? "text-primary" : "text-accent hover:text-primary"
+                    }`}
+                  >
+                    /{g.title}
+                    {isActive && <span className="ml-2">●</span>}
+                  </button>
+                  <div className="flex flex-wrap gap-2">
+                    {g.skills.map((s) => (
+                      <span key={s} className="pill text-sm py-2 px-4">
+                        {s}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              </Reveal>
             );
           })}
         </div>
