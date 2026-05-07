@@ -1,19 +1,26 @@
+import { useState } from "react";
+
 const groups = [
   {
+    key: "tech",
     title: "Technical",
-    skills: ["HTML/CSS", "Python", "API Integration", "Git", "AI/ML", "Prompt Engineering", "SaaS Tools", "Web3"],
+    skills: ["Python", "HTML/CSS", "API Integration", "Git", "AI/ML", "Prompt Engineering", "Web3", "SaaS Tools"],
   },
   {
+    key: "growth",
     title: "Product & Growth",
-    skills: ["Product Roadmapping", "GTM Strategy", "OKRs & KPIs", "SEO & Analytics", "Funnel Optimization", "Social Media Strategy", "Notion", "Canva"],
+    skills: ["Roadmapping", "GTM Strategy", "OKRs", "SEO", "Funnel Optimization", "Social Media", "Biz Dev"],
   },
   {
+    key: "pro",
     title: "Professional",
-    skills: ["Public Speaking", "Event Management", "Leadership", "Content Creation", "Personal Branding", "Community Building"],
+    skills: ["Public Speaking", "Event Management", "Content Creation", "Community Building", "Personal Branding"],
   },
 ];
 
 const Skills = () => {
+  const [active, setActive] = useState<string | null>(null);
+
   return (
     <section className="section-padding relative" id="skills">
       <div className="container-narrow">
@@ -21,26 +28,38 @@ const Skills = () => {
           <span className="w-8 h-px bg-primary" />
           Skills
         </div>
-
-        <h2 className="font-display text-4xl md:text-5xl font-bold mb-12">
+        <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
           The <span className="text-gradient-yellow">stack</span>.
         </h2>
+        <p className="text-sm text-muted-foreground mb-10 font-mono">
+          Click a header to filter · click again to reset
+        </p>
 
-        <div className="space-y-10">
-          {groups.map((g) => (
-            <div key={g.title}>
-              <h3 className="text-sm font-mono text-accent uppercase tracking-widest mb-4">
-                /{g.title}
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {g.skills.map((s) => (
-                  <span key={s} className="pill text-sm py-2 px-4">
-                    {s}
-                  </span>
-                ))}
+        <div className="grid md:grid-cols-3 gap-10">
+          {groups.map((g) => {
+            const isActive = active === g.key;
+            const isDimmed = active && !isActive;
+            return (
+              <div key={g.key} className={`transition-opacity ${isDimmed ? "opacity-30" : "opacity-100"}`}>
+                <button
+                  onClick={() => setActive(isActive ? null : g.key)}
+                  className={`text-sm font-mono uppercase tracking-widest mb-4 transition-colors ${
+                    isActive ? "text-primary" : "text-accent hover:text-primary"
+                  }`}
+                >
+                  /{g.title}
+                  {isActive && <span className="ml-2">●</span>}
+                </button>
+                <div className="flex flex-wrap gap-2">
+                  {g.skills.map((s) => (
+                    <span key={s} className="pill text-sm py-2 px-4">
+                      {s}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

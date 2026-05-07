@@ -1,20 +1,29 @@
-import { Users } from "lucide-react";
+import { Users, Code2, GraduationCap, Award } from "lucide-react";
 
 const items = [
   {
+    Icon: Code2,
     org: "Code Geeks Community",
     role: "CMO & Advisor",
-    impact: "Executed 10+ events, secured 100K+ in sponsorships, managed 8,000+ applications & drove 500K+ impressions.",
+    chips: ["500K+ impressions", "100K+ sponsorships", "10+ events"],
   },
   {
+    Icon: Users,
     org: "Hack With India",
     role: "Core Member",
-    impact: "Co-organized large-scale hackathons (25,000+ registrations) in collaboration with Microsoft & Google.",
+    chips: ["25,000+ registrations", "Microsoft + Google"],
   },
   {
+    Icon: GraduationCap,
     org: "Bifröst EdTech",
     role: "Core Member",
-    impact: "Managed 50 organizations & curated curricula across 10+ departments to expand student opportunities.",
+    chips: ["50 orgs managed", "10+ departments"],
+  },
+  {
+    Icon: Award,
+    org: "Rotary",
+    role: "Best Interactor · Multimedia Head",
+    chips: ["Diamond Club"],
   },
 ];
 
@@ -26,18 +35,26 @@ const Leadership = () => {
           <span className="w-8 h-px bg-primary" />
           Leadership
         </div>
-
         <h2 className="font-display text-4xl md:text-5xl font-bold mb-12">
           Where I've <span className="text-gradient-yellow">led</span>.
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-4">
-          {items.map((i) => (
-            <div key={i.org} className="card-dark p-6 group">
-              <Users className="text-primary mb-4 group-hover:scale-110 transition-transform" size={20} />
-              <h3 className="font-display text-xl font-bold mb-1">{i.org}</h3>
-              <p className="text-sm text-accent font-medium mb-3">{i.role}</p>
-              <p className="text-sm text-muted-foreground leading-relaxed">{i.impact}</p>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {items.map(({ Icon, org, role, chips }) => (
+            <div key={org} className="card-dark p-6 group">
+              <Icon className="text-primary mb-4 group-hover:scale-110 transition-transform" size={22} />
+              <h3 className="font-display text-lg font-bold mb-1 leading-tight">{org}</h3>
+              <p className="text-xs text-muted-foreground mb-4">{role}</p>
+              <div className="flex flex-wrap gap-1.5">
+                {chips.map((c) => (
+                  <span
+                    key={c}
+                    className="text-[10px] font-mono px-2 py-1 rounded-full bg-secondary border border-border text-foreground/80"
+                  >
+                    {c}
+                  </span>
+                ))}
+              </div>
             </div>
           ))}
         </div>
