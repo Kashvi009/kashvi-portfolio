@@ -1,13 +1,11 @@
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
-import Marquee from "@/components/Marquee";
-import About from "@/components/About";
+import ImpactBar from "@/components/ImpactBar";
 import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
-import Education from "@/components/Education";
 import Leadership from "@/components/Leadership";
-import Achievements from "@/components/Achievements";
+import Recognition from "@/components/Recognition";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import CursorGlow from "@/components/CursorGlow";
@@ -18,14 +16,12 @@ const Index = () => {
       <CursorGlow />
       <Navigation />
       <Hero />
-      <Marquee />
-      <About />
+      <ImpactBar />
       <Experience />
       <Projects />
       <Skills />
-      <Education />
       <Leadership />
-      <Achievements />
+      <Recognition />
       <Contact />
       <Footer />
     </main>
