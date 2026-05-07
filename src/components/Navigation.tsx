@@ -3,103 +3,85 @@ import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { href: "#about", label: "About" },
-  { href: "#impact", label: "Impact" },
-  { href: "#services", label: "Services" },
   { href: "#experience", label: "Experience" },
-  { href: "#education", label: "Education" },
+  { href: "#projects", label: "Projects" },
+  { href: "#skills", label: "Skills" },
+  { href: "#achievements", label: "Awards" },
   { href: "#contact", label: "Contact" },
 ];
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setIsScrolled(window.scrollY > 30);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-    setIsMobileMenuOpen(false);
+  const go = (href: string) => {
+    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+    setOpen(false);
   };
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-background/95 backdrop-blur-md shadow-sm py-3"
-          : "bg-transparent py-5"
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
+        isScrolled ? "bg-background/80 backdrop-blur-xl border-b border-border py-3" : "bg-transparent py-5"
       }`}
     >
-      <div className="container-narrow px-6 md:px-12 lg:px-20">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <a 
-            href="#"
-            className={`font-display text-xl font-bold transition-colors ${
-              isScrolled ? "text-foreground" : "text-primary-foreground"
-            }`}
-            onClick={(e) => {
-              e.preventDefault();
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }}
-          >
-            Kashvi Arora
-          </a>
+      <div className="container-narrow px-6 md:px-12 lg:px-20 flex items-center justify-between">
+        <a
+          href="#"
+          onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+          className="font-display font-bold text-lg tracking-tight"
+        >
+          Kashvi<span className="text-primary">.</span>
+        </a>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <button
-                key={link.href}
-                onClick={() => scrollToSection(link.href)}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
-                  isScrolled ? "text-muted-foreground" : "text-primary-foreground/80"
-                }`}
-              >
-                {link.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Mobile Menu Button */}
+        <div className="hidden md:flex items-center gap-1">
+          {navLinks.map((l) => (
+            <button
+              key={l.href}
+              onClick={() => go(l.href)}
+              className="px-3 py-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+            >
+              {l.label}
+            </button>
+          ))}
           <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className={`md:hidden p-2 rounded-lg transition-colors ${
-              isScrolled 
-                ? "text-foreground hover:bg-secondary" 
-                : "text-primary-foreground hover:bg-primary-foreground/10"
-            }`}
+            onClick={() => go("#contact")}
+            className="ml-2 px-4 py-2 bg-primary text-primary-foreground rounded-full text-sm font-semibold hover:shadow-yellow transition-all"
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            Hire Me
           </button>
         </div>
 
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 bg-background/98 backdrop-blur-lg shadow-lg border-t border-border animate-fade-in">
-            <div className="py-4 px-6 space-y-1">
-              {navLinks.map((link) => (
-                <button
-                  key={link.href}
-                  onClick={() => scrollToSection(link.href)}
-                  className="block w-full text-left py-3 text-foreground hover:text-primary transition-colors font-medium"
-                >
-                  {link.label}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
+        <button
+          onClick={() => setOpen(!open)}
+          className="md:hidden p-2 text-foreground"
+          aria-label="Toggle menu"
+        >
+          {open ? <X size={22} /> : <Menu size={22} />}
+        </button>
       </div>
+
+      {open && (
+        <div className="md:hidden absolute top-full inset-x-0 bg-background/95 backdrop-blur-xl border-b border-border animate-fade-in">
+          <div className="px-6 py-4 space-y-1">
+            {navLinks.map((l) => (
+              <button
+                key={l.href}
+                onClick={() => go(l.href)}
+                className="block w-full text-left py-3 text-foreground hover:text-primary font-medium"
+              >
+                {l.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
     </nav>
   );
 };
