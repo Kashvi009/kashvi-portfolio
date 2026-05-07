@@ -2,43 +2,34 @@ import { ArrowUpRight } from "lucide-react";
 
 const experiences = [
   {
-    role: "Freelance · Personal Brand Strategist",
-    company: "Self-employed",
-    duration: "2023 — Present",
+    role: "Branding, Marketing & Tech Consultant",
+    company: "Freelancer (Full-time)",
+    duration: "Jun 2023 — Present · New Delhi",
     primary: true,
     bullets: [
-      "Scaled creator & founder personal brands to 1M+ combined impressions.",
-      "Delivered branding, content & growth strategy across 30+ clients.",
-      "Built systems for DevRel, social, and community-led growth.",
+      "Personal Branding & Consulting: Transformed 30+ client profiles; revamped CVs, portfolios & pitches across 50+ 1:1 sessions.",
+      "Marketing & Growth: Scaled 10+ brands and 15+ personal profiles to 1M+ impressions, driving ~50% avg visibility growth.",
+      "DevRel & Tech Lead: Spearheaded 5+ developer programs across 2,000+ community members, lifting active participation by 40%.",
     ],
   },
   {
-    role: "Founder's Office Assistant",
-    company: "QuickBlox",
-    duration: "Aug 2025 — Sep 2025 · London",
+    role: "Founder's Office Assistant — Intern",
+    company: "Injoit Ltd · QuickBlox",
+    duration: "Aug 2025 — Oct 2025 · United Kingdom",
     bullets: [
-      "Owned API integrations, SDK testing, and developer onboarding flows.",
-      "Shipped technical blogs, product demos, and training assets.",
-      "Ran social media calendar & supported client demos end-to-end.",
+      "DevRel & Pre-Sales: Drove adoption for 2 AI product lines — integrated APIs, stress-tested SDKs, shipped blogs, demos & onboarding.",
+      "Led client meetings, pitched to prospects, and managed customer success touchpoints end-to-end.",
+      "Owned content strategy across LinkedIn, X, Instagram & Discord — grew community engagement by 30%.",
     ],
   },
   {
-    role: "IT Intern",
+    role: "Information Technology Intern",
     company: "Airports Authority of India",
-    duration: "Jun 2025 — Jul 2025",
+    duration: "Jun 2025 — Jul 2025 · New Delhi",
     bullets: [
-      "Built J.A.N.A.N.I., an AI-powered maternal health solution.",
-      "Worked on Digi Yatra, cybersecurity, and data centre operations.",
-      "Created HRMS Resume ATS Scanner for the aviation sector.",
-    ],
-  },
-  {
-    role: "Marketing & Growth Intern",
-    company: "Schmooze",
-    duration: "Feb 2025 — Apr 2025",
-    bullets: [
-      "Drove 10% engagement lift via meme-led growth experiments.",
-      "Acquired 100+ downloads through targeted GenZ campaigns.",
+      "Built 2 production-grade AI/ML solutions in Python + NLP, deployed across HR & healthcare verticals.",
+      "Presented work directly to senior leadership at AAI.",
+      "Contributed to Digi Yatra rollout, cybersecurity protocols & airport data centre operations.",
     ],
   },
 ];

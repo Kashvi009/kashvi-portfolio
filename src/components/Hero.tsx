@@ -1,9 +1,9 @@
-import { ArrowRight, Download, Sparkles } from "lucide-react";
+import { ArrowRight, Download, Linkedin, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const stats = [
   { value: 1000000, label: "Impressions", suffix: "+", display: "1M" },
-  { value: 200, label: "Events Curated", suffix: "+", display: "200" },
+  { value: 300, label: "Events Curated", suffix: "+", display: "300" },
   { value: 50, label: "Judge Panels", suffix: "+", display: "50" },
 ];
 
@@ -12,7 +12,6 @@ const Counter = ({ target, display, suffix }: { target: number; display: string;
   const [done, setDone] = useState(false);
 
   useEffect(() => {
-    let start = 0;
     const duration = 1800;
     const startTime = performance.now();
     const step = (now: number) => {
@@ -36,7 +35,6 @@ const Counter = ({ target, display, suffix }: { target: number; display: string;
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20" id="home">
-      {/* Background effects */}
       <div className="absolute inset-0 grid-bg opacity-40" />
       <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
       <div className="absolute top-1/4 -left-20 w-96 h-96 bg-primary/20 rounded-full blur-[120px] animate-glow-pulse" />
@@ -45,7 +43,10 @@ const Hero = () => {
       <div className="relative z-10 container-narrow px-6 md:px-12 lg:px-20 w-full">
         <div className="max-w-5xl">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/5 text-primary text-xs font-medium mb-8 animate-fade-up">
-            <Sparkles size={12} />
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+            </span>
             Available for opportunities · New Delhi, India
           </div>
 
@@ -62,11 +63,10 @@ const Hero = () => {
           </p>
 
           <p className="text-base md:text-lg text-muted-foreground max-w-2xl mb-10 animate-fade-up stagger-3">
-            Shipped SaaS products. Scaled communities to 1M+ impressions. Led 250+ initiatives across product, growth, and strategy.
+            Shipped SaaS products. Scaled communities to 1M+ impressions. Led 250+ initiatives. I turn ambiguous problems into executed outcomes.
           </p>
 
-          {/* CTAs */}
-          <div className="flex flex-wrap gap-4 mb-16 animate-fade-up stagger-4">
+          <div className="flex flex-wrap gap-3 mb-16 animate-fade-up stagger-4">
             <a
               href="#contact"
               className="group inline-flex items-center gap-2 px-6 py-3.5 bg-primary text-primary-foreground rounded-full font-semibold transition-all hover:shadow-yellow hover:scale-[1.02]"
@@ -78,14 +78,23 @@ const Hero = () => {
               href="https://linkedin.com/in/kashvi15"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3.5 bg-secondary border border-border text-foreground rounded-full font-semibold transition-all hover:border-primary/50 hover:text-primary"
+              className="group inline-flex items-center gap-2 px-6 py-3.5 bg-secondary border border-border text-foreground rounded-full font-semibold transition-all hover:border-accent/60 hover:text-accent hover:shadow-red"
+            >
+              <Linkedin size={18} />
+              Visit LinkedIn
+              <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+            </a>
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3.5 bg-transparent border border-border text-foreground rounded-full font-semibold transition-all hover:border-primary/50 hover:text-primary"
             >
               <Download size={18} />
               View Resume
             </a>
           </div>
 
-          {/* Animated counters */}
           <div className="grid grid-cols-3 gap-4 md:gap-8 max-w-2xl animate-fade-up stagger-5">
             {stats.map((s) => (
               <div key={s.label} className="border-l-2 border-primary/40 pl-4 md:pl-6">

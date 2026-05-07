@@ -2,19 +2,19 @@ import { Users } from "lucide-react";
 
 const items = [
   {
-    org: "Code Geeks",
-    role: "Community Lead",
-    impact: "Grew dev community & ran workshops for 1000+ students.",
+    org: "Code Geeks Community",
+    role: "CMO & Advisor",
+    impact: "Executed 10+ events, secured 100K+ in sponsorships, managed 8,000+ applications & drove 500K+ impressions.",
   },
   {
     org: "Hack With India",
-    role: "Mentor & Organizer",
-    impact: "Mentored 50+ teams across national-level hackathons.",
+    role: "Core Member",
+    impact: "Co-organized large-scale hackathons (25,000+ registrations) in collaboration with Microsoft & Google.",
   },
   {
-    org: "Bifröst",
-    role: "Strategist",
-    impact: "Drove brand & community programs across student campuses.",
+    org: "Bifröst EdTech",
+    role: "Core Member",
+    impact: "Managed 50 organizations & curated curricula across 10+ departments to expand student opportunities.",
   },
 ];
 

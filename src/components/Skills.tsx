@@ -1,15 +1,15 @@
 const groups = [
   {
     title: "Technical",
-    skills: ["Python", "JavaScript", "React", "AI/ML", "APIs & SDKs", "SQL", "Git", "Cybersecurity"],
+    skills: ["HTML/CSS", "Python", "API Integration", "Git", "AI/ML", "Prompt Engineering", "SaaS Tools", "Web3"],
   },
   {
     title: "Product & Growth",
-    skills: ["Product Strategy", "DevRel", "Growth Marketing", "User Acquisition", "Content Strategy", "Brand Building", "SEO"],
+    skills: ["Product Roadmapping", "GTM Strategy", "OKRs & KPIs", "SEO & Analytics", "Funnel Optimization", "Social Media Strategy", "Notion", "Canva"],
   },
   {
     title: "Professional",
-    skills: ["Public Speaking", "Community Building", "Event Curation", "Leadership", "Partnerships", "Mentorship"],
+    skills: ["Public Speaking", "Event Management", "Leadership", "Content Creation", "Personal Branding", "Community Building"],
   },
 ];
 

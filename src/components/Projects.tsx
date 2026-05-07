@@ -3,16 +3,18 @@ import { ArrowUpRight } from "lucide-react";
 const projects = [
   {
     title: "J.A.N.A.N.I.",
-    description: "AI-powered maternal health solution built during AAI internship — combines ML triage with accessible UX for at-risk mothers.",
-    metrics: ["AI/ML", "Healthcare", "Govt. project"],
-    tags: ["Python", "ML", "Full-stack"],
+    subtitle: "AI-Powered Maternal Health Platform",
+    description: "Full-stack AI/ML platform delivering personalized maternal care — real-time health scoring, smart symptom analysis, AI chatbot, and PCOS tracking across every stage of pregnancy. Deployed in a production-like environment.",
+    metrics: ["AI/ML", "Full-stack", "Healthcare"],
+    tags: ["Python", "NLP", "AI Chatbot"],
     accent: "yellow",
   },
   {
     title: "Kartavya Events",
-    description: "End-to-end event curation platform powering 200+ events, hackathons, and judge panels with national-level reach.",
-    metrics: ["200+ events", "10K+ teams", "50+ judges"],
-    tags: ["Growth", "Operations", "Community"],
+    subtitle: "Youth Leadership Venture",
+    description: "Built a full-stack event management platform & ops infrastructure from scratch. Organized multiple youth conferences for 2,000+ participants with 60% profit margins.",
+    metrics: ["500K+ impressions", "2,000+ attendees", "60% margins"],
+    tags: ["Product", "Operations", "Growth"],
     accent: "red",
   },
 ];
@@ -36,13 +38,16 @@ const Projects = () => {
               key={p.title}
               className={`group card-dark ${p.accent === "red" ? "card-dark-red" : ""} p-8 cursor-pointer`}
             >
-              <div className="flex items-start justify-between mb-4">
+              <div className="flex items-start justify-between mb-2">
                 <h3 className="font-display text-2xl md:text-3xl font-bold">{p.title}</h3>
                 <ArrowUpRight
                   size={24}
                   className={`${p.accent === "red" ? "text-accent" : "text-primary"} group-hover:rotate-45 transition-transform`}
                 />
               </div>
+              <p className={`text-sm font-mono mb-4 ${p.accent === "red" ? "text-accent" : "text-primary"}`}>
+                {p.subtitle}
+              </p>
 
               <p className="text-muted-foreground mb-6 leading-relaxed">{p.description}</p>
 
@@ -61,7 +66,7 @@ const Projects = () => {
                 ))}
               </div>
 
-              <div className="flex flex-wrap gap-2 pt-6 border-t border-border">
+              <div className="flex flex-wrap gap-3 pt-6 border-t border-border">
                 {p.tags.map((t) => (
                   <span key={t} className="text-xs text-muted-foreground font-mono">
                     /{t}

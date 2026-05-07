@@ -1,82 +1,53 @@
-import { GraduationCap } from "lucide-react";
-
 const education = [
   {
-    degree: "Bachelor of Technology - BTech",
-    institution: "Guru Gobind Singh Indraprastha University",
-    field: "Information Technology",
-    period: "Current",
-    number: "01",
+    period: "2023 — 2027",
+    degree: "B.Tech, Information Technology",
+    institute: "Guru Gobind Singh Indraprastha University",
+    score: "8.55 CGPA",
   },
   {
-    degree: "B.Sc (Prog.) Physical Science",
-    institution: "Delhi University",
-    field: "Computer Science Majors & Physical Science + Sociology Minors",
-    period: "August 2023 - November 2023",
-    number: "02",
+    period: "2023",
+    degree: "Senior Secondary (Class XII), CBSE",
+    institute: "Mira Model School, New Delhi",
+    score: "80.4%",
   },
   {
-    degree: "High School Diploma",
-    institution: "Mira Model School",
-    field: "Class 12th",
-    period: "April 2021 - April 2023",
-    number: "03",
-  },
-  {
-    degree: "Middle School Diploma",
-    institution: "Mira Model School",
-    field: "Class 10th",
-    period: "April 2012 - April 2021",
-    number: "04",
+    period: "2021",
+    degree: "Secondary (Class X), CBSE",
+    institute: "Mira Model School, New Delhi",
+    score: "92.8%",
   },
 ];
 
 const Education = () => {
   return (
-    <section className="section-padding bg-secondary/30" id="education">
+    <section className="section-padding relative" id="education">
       <div className="container-narrow">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Education & Credentials
-          </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-primary to-wine-light mx-auto rounded-full" />
+        <div className="section-label">
+          <span className="w-8 h-px bg-primary" />
+          Education
         </div>
 
-        {/* Education Grid */}
-        <div className="grid md:grid-cols-2 gap-6">
-          {education.map((edu, index) => (
-            <div
-              key={edu.number}
-              className="group bg-card rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-md transition-all duration-300 border border-border/50 relative overflow-hidden"
-            >
-              {/* Background Number */}
-              <span className="absolute -right-4 -top-4 font-display text-[120px] font-bold text-primary/5 leading-none select-none">
-                {edu.number}
-              </span>
+        <h2 className="font-display text-4xl md:text-5xl font-bold mb-12">
+          Academic <span className="text-gradient-yellow">record</span>.
+        </h2>
 
-              {/* Content */}
-              <div className="relative z-10">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
-                    <GraduationCap className="text-primary" size={24} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-display text-lg md:text-xl font-bold text-foreground mb-1">
-                      {edu.degree}
-                    </h3>
-                    <p className="text-primary font-medium mb-2">
-                      {edu.institution}
-                    </p>
-                    <p className="text-muted-foreground text-sm mb-2">
-                      {edu.field}
-                    </p>
-                    <p className="text-muted-foreground/70 text-sm">
-                      {edu.period}
-                    </p>
-                  </div>
-                </div>
+        <div className="card-dark overflow-hidden">
+          {education.map((e, i) => (
+            <div
+              key={e.period}
+              className={`flex flex-col md:flex-row md:items-center gap-2 md:gap-6 p-6 md:p-8 transition-colors hover:bg-primary/5 ${
+                i !== education.length - 1 ? "border-b border-border" : ""
+              }`}
+            >
+              <span className="font-mono text-sm text-muted-foreground md:w-32 shrink-0">{e.period}</span>
+              <div className="flex-1">
+                <h3 className="font-display text-lg md:text-xl font-bold">{e.degree}</h3>
+                <p className="text-sm text-muted-foreground">{e.institute}</p>
               </div>
+              <span className="font-display font-bold text-primary text-lg md:text-xl md:w-28 md:text-right">
+                {e.score}
+              </span>
             </div>
           ))}
         </div>
