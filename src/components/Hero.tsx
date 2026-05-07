@@ -1,17 +1,6 @@
 import { ArrowRight, Download, ChevronDown, Linkedin } from "lucide-react";
-import { useEffect, useState } from "react";
-
-const ROLES = ["Product Builder", "Growth Strategist", "Personal Brand Strategist"];
 
 const Hero = () => {
-  const [idx, setIdx] = useState(0);
-  const [paused, setPaused] = useState(false);
-
-  useEffect(() => {
-    if (paused) return;
-    const t = setInterval(() => setIdx((i) => (i + 1) % ROLES.length), 2500);
-    return () => clearInterval(t);
-  }, [paused]);
 
   const scrollTo = (id: string) =>
     document.querySelector(id)?.scrollIntoView({ behavior: "smooth" });
