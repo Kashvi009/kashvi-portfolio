@@ -1,7 +1,7 @@
 import { ArrowRight, Download, ChevronDown, Linkedin } from "lucide-react";
 import { useEffect, useState } from "react";
 
-const ROLES = ["Product Builder", "DevRel Engineer", "Growth Strategist", "Community Architect"];
+const ROLES = ["Product Builder", "Growth Strategist", "Personal Brand Strategist"];
 
 const Hero = () => {
   const [idx, setIdx] = useState(0);
@@ -36,9 +36,9 @@ const Hero = () => {
           </div>
 
           <h1 className="font-display text-6xl md:text-7xl lg:text-[6rem] font-bold leading-[0.9] tracking-tight mb-6 animate-fade-up stagger-1">
-            <span className="text-gradient">Kashvi</span>
+            <span className="text-gradient-yellow drop-shadow-[0_0_30px_hsl(var(--primary)/0.35)]">Kashvi</span>
             <br />
-            <span className="text-foreground">Arora.</span>
+            <span className="text-gradient-yellow drop-shadow-[0_0_30px_hsl(var(--primary)/0.35)]">Arora.</span>
           </h1>
 
           <div
