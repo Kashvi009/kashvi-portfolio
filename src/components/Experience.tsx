@@ -82,9 +82,12 @@ const Experience = () => {
 
   const goTo = (i: number) => {
     const target = cardRefs.current[i];
-    if (target && trackRef.current) {
-      trackRef.current.scrollTo({ left: target.offsetLeft - trackRef.current.offsetLeft, behavior: "smooth" });
-    }
+    const track = trackRef.current;
+    if (!target || !track) return;
+    const left =
+      target.getBoundingClientRect().left - track.getBoundingClientRect().left + track.scrollLeft;
+    track.scrollTo({ left, behavior: "smooth" });
+    setActiveIdx(i);
   };
 
   const prev = () => goTo(Math.max(0, activeIdx - 1));
