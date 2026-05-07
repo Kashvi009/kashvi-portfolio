@@ -1,9 +1,8 @@
-import { Mail, Linkedin, Download, Link2, ArrowUpRight } from "lucide-react";
+import { Mail, Linkedin, Download, ArrowUpRight } from "lucide-react";
 
 const links = [
   { Icon: Mail, label: "arorakashvi15@gmail.com", href: "mailto:arorakashvi15@gmail.com" },
   { Icon: Linkedin, label: "linkedin.com/in/kashvi15", href: "https://linkedin.com/in/kashvi15" },
-  { Icon: Link2, label: "kashvi-portfolio.lovable.app", href: "https://kashvi-portfolio.lovable.app" },
   {
     Icon: Download,
     label: "Download Resume (PDF)",
